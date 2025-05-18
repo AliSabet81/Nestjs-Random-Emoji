@@ -1,4 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
+
 import { EmojiValidationPipe } from './emoji-validation.pipe';
 
 describe('EmojiValidationPipe', () => {
