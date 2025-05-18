@@ -1,14 +1,20 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 import { EmojiValidationPipe } from './common/emoji-validation/emoji-validation.pipe';
+import { Request } from 'express';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getEmoji(@Query('index', EmojiValidationPipe) index?: number): string {
-    console.log(`Query: index: ${index}`);
-    return this.appService.getEmoji(index);
+  getEmoji(
+    @Req() req: Request,
+    @Query('index', EmojiValidationPipe) index?: number,
+  ): { emoji: string; browser?: string } {
+    return {
+      emoji: this.appService.getEmoji(index),
+      browser: req.headers.browser?.toString(),
+    };
   }
 }
