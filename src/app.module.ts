@@ -1,3 +1,4 @@
+import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
@@ -11,7 +12,7 @@ import { AllExceptionsFilter } from './common/all-exceptions/all-exceptions.filt
 import { TransformResponseInterceptor } from './common/transform-response/transform-response.interceptor';
 
 @Module({
-  imports: [],
+  imports: [ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [
     AppService,
